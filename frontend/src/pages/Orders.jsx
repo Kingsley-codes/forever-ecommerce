@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 
 const Orders = () => {
 
   const { backendURL, token, currency} = useContext(ShopContext);
+
+  const [orderData, setOrderData] = useState(  []);
 
   return (
     <div className="border-t pt-16">
@@ -44,4 +46,4 @@ const Orders = () => {
   );
 }
 
-export default
+export default Orders;
