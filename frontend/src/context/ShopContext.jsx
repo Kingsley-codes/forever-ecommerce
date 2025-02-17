@@ -7,12 +7,13 @@ export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
 
+
     const currency = "$";
     const delivery_fee = 10;
     const backendURL = import.meta.env.VITE_BACKEND_URL; 
 
 
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState(''); 
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
     const [products, setProducts] = useState([]);
@@ -85,7 +86,7 @@ const ShopContextProvider = (props) => {
         return totalCount;
     }
 
-const updateQuantity = async (itemId, size, quantity) => {
+    const updateQuantity = async (itemId, size, quantity) => {
         let cartData = structuredClone(cartItems);
         cartData[itemId][size] = quantity;
 
@@ -153,13 +154,14 @@ const updateQuantity = async (itemId, size, quantity) => {
         search, setSearch, showSearch, setShowSearch,
         cartItems, setCartItems, addToCart, getCartCount,
         updateQuantity, getCartAmount, navigate, backendURL,
-        setToken, token, setCartItems
+        setToken, token
+
     }
 
     return (
         <ShopContext.Provider value={value}>
             {props.children}
-        </ShopContext.Provider>
+        </ShopContext.Provider> 
     )
 } 
 
