@@ -13,8 +13,9 @@ const Orders = ({ token }) => {
     try {
       const response = await axios.post(`${backendUrl}/api/order/list`, {}, { headers: { token } });
       if (response.data.success) {
-        setOrders(response.data.orders || []); // Ensure it's an array
-
+        // Ensure it's an array and sort by date (latest first)
+        const sortedOrders = (response.data.orders || []).sort((a, b) => new Date(b.date) - new Date(a.date));
+        setOrders(sortedOrders);
       } else {
         toast.error(response.data.message);
       }
@@ -25,16 +26,15 @@ const Orders = ({ token }) => {
 
   const statusHandler = async (event, orderId) => {
     try {
-      const response = await axios.post(`${backendUrl}/api/order/status`, {orderId, status:event.target.value}, { headers: { token } });
+      const response = await axios.post(`${backendUrl}/api/order/status`, { orderId, status: event.target.value }, { headers: { token } });
       if (response.data.success) {
         await fetchAllOrders(); 
       }
     } catch (error) {
       toast.error(error.message);
       console.log(error);
-      
     }
-  }
+  };
 
   useEffect(() => {
     fetchAllOrders();
@@ -59,7 +59,7 @@ const Orders = ({ token }) => {
                   ))}
                 </div>
                   
-                <p className="mt-3 mb-2 font-medium">{order.address.firstName + "" + order.address.lastName}</p>
+                <p className="mt-3 mb-2 font-medium">{order.address.firstName + " " + order.address.lastName}</p>
                 <div>
                   <p>{order.address.street + "," }</p>
                   <p>{order.address.city + ", " + order.address.state + ", " + order.address.country + ", " + order.address.zipcode}</p>
