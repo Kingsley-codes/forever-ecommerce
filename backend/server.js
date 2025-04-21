@@ -19,7 +19,7 @@ app.use(express.json());
 
 app.use(cors({
     origin: [
-        'https://blog-mtrs.onrender.com/', // Your Render frontend URL
+        'https://forever-ecommerce-ns8g.onrender.com', // Your Render frontend URL
         'http://localhost:5173', // For local testing (frontend)
         'http://localhost:5174', // For local testing (admin panel)
     ],
