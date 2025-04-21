@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 
 const connectDB = async () => {
-    mongoose.connection.on('connected', () => {
-        console.log('DB Connected');
-    });
-
     try {
-        await mongoose.connect('mongodb://localhost:27017/e-commerce');
+        const conn = await mongoose.connect(process.env.MONGO_URI, {
+            serverSelectionTimeoutMS: 5000
+        });
+        console.log(`MongoDB connected to database: ${conn.connection.name}`);
     } catch (error) {
-        console.error('MongoDB connection error:', error);
+        console.error("Full MongoDB connection error:", error);
+        process.exit(1);
     }
 };
 
