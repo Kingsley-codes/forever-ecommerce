@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "build": "npm install"
+    "build": "npm rebuild bcrypt --update-binary",
+    "install": "npm rebuild bcrypt --update-binary"
   },
   "author": "",
   "license": "ISC",
